@@ -4,6 +4,7 @@ package com.marcelodev.agendadortarefas.infrastructure.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,9 @@ public class JwtUtil {
     private final SecretKey secretKey;
 
     public JwtUtil() {
-        // Agora usa HS256, que é compatível com SecretKey
-        this.secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
+        String secret = "Wm5rS2tWQ3dIV2R1Rnhsc1Npb3RYaGhHV3ZycUlEa1E=";
+        this.secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
     }
 
 
