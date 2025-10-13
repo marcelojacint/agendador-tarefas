@@ -1,7 +1,6 @@
 package com.marcelodev.agendadortarefas.infrastructure.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.marcelodev.agendadortarefas.enums.StatusNotificacaoEnum;
+import com.marcelodev.agendadortarefas.business.enums.StatusNotificacaoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

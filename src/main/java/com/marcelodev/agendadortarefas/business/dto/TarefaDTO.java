@@ -1,7 +1,7 @@
 package com.marcelodev.agendadortarefas.business.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.marcelodev.agendadortarefas.enums.StatusNotificacaoEnum;
+import com.marcelodev.agendadortarefas.business.enums.StatusNotificacaoEnum;
 import lombok.*;
 
 import java.time.LocalDateTime;
