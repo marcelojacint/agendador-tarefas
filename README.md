@@ -1,3 +1,3 @@
 # Agendador de Tarefas
 
-## Microserviço paa projeto de agendamento de tarefas
+## Microserviço para projeto de agendamento de tarefas
