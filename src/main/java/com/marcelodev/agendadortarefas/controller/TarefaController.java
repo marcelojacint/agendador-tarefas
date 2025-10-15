@@ -2,6 +2,8 @@ package com.marcelodev.agendadortarefas.controller;
 
 import com.marcelodev.agendadortarefas.business.TarefaService;
 import com.marcelodev.agendadortarefas.business.dto.TarefaDTO;
+import com.marcelodev.agendadortarefas.business.enums.StatusNotificacaoEnum;
+import com.marcelodev.agendadortarefas.infrastructure.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +44,38 @@ public class TarefaController {
         List<TarefaDTO> tarefaDTOS = tarefaService.buscaTarefaPorEmail(token);
 
         return ResponseEntity.ok(tarefaDTOS);
+    }
+
+    @DeleteMapping()
+    public ResponseEntity<Void> deletarTarefaPorId(@RequestParam("id") String id) {
+        try {
+            tarefaService.deletarTarefa(id);
+            return ResponseEntity.noContent().build();
+        } catch (ResourceNotFoundException e) {
+            throw new ResourceNotFoundException("erro ao deletar tarefa por id; " + id, e.getCause());
+        }
+    }
+
+    @PatchMapping
+    public ResponseEntity<Void> alterarStatus(@RequestParam("status")   StatusNotificacaoEnum status,
+                                              @RequestParam("id") String id) {
+        try {
+            TarefaDTO tarefaDTO = tarefaService.alterarStatus(status, id);
+
+            return ResponseEntity.noContent().build();
+
+        } catch (ResourceNotFoundException e) {
+            throw new ResourceNotFoundException("Erro ao alterar status " + e.getCause());
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity<TarefaDTO> updateTarefa(@RequestBody TarefaDTO dto, @RequestParam("id") String id) {
+
+        tarefaService.updateTarefa(dto, id);
+
+        return ResponseEntity.noContent().build();
+
     }
 
     private URI geraUri(TarefaDTO tarefaSalva) {
